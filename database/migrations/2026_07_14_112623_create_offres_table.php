@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('offres', function (Blueprint $table) {
             $table->id();
+
+            // Entreprise propriétaire de l'offre
+            $table->foreignId('entreprise_id')
+                  ->constrained()
+                  ->onDelete('cascade');
+
+            // Informations de l'offre
+            $table->string('titre');
+            $table->text('description');
+            $table->string('type_contrat');
+
             $table->timestamps();
         });
     }
