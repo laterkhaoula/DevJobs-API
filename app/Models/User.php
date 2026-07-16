@@ -16,20 +16,19 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $fillable = [
-        'prenom',
-        'nom',
-        'email',
-        'password',
-        'role',
-    ];
+    'first_name',
+    'last_name',
+    'email',
+    'password',
+];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -37,9 +36,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * The attributes that should be cast.
      */
     protected function casts(): array
     {
@@ -70,6 +67,9 @@ class User extends Authenticatable
      */
     public function competences()
     {
-        return $this->belongsToMany(Competence::class);
+        return $this->belongsToMany(
+            Competence::class,
+            'competence_user'
+        );
     }
 }
